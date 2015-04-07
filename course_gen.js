@@ -32,7 +32,6 @@ var callbackCourse = function(res, stream, categoryId) {
       stream.write(JSON.stringify({
         _id: courseId,
         name: nodeLink.text(),
-        url: nodeLink.attr('href'),
         teachers: teachersList,
         parent_id: categoryId
       }) + "\n");
@@ -66,13 +65,13 @@ var callbackCategory = function(response) {
         var node = $(v);
         var nodeInfo = node.children('.info');
         var categoryId = node.data('categoryid');
-        if (extractCoursesNum(nodeInfo.find('.numberofcourse').text()) > 0) {
+        //if (extractCoursesNum(nodeInfo.find('.numberofcourse').text()) > 0) {
           console.log(nodeInfo.find('a').attr('href'));
           http.request(GETCourseOpts(categoryId),
             function (res) {
               callbackCourse(res, stream, categoryId);
             }).end();
-        }
+        //}
       });
     });
   });
