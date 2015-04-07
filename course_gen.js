@@ -63,6 +63,9 @@ var callbackCategory = function(response) {
     var stream = fs.createWriteStream('course.json');
     stream.once('open', function(fd) {
       $('.category').each(function (k, v) {
+        var node = $(v);
+        var nodeInfo = node.children('.info');
+        var categoryId = node.data('categoryid');
         if (extractCoursesNum(nodeInfo.find('.numberofcourse').text()) > 0) {
           console.log(nodeInfo.find('a').attr('href'));
           http.request(GETCourseOpts(categoryId),
